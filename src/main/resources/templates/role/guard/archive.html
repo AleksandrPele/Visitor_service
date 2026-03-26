@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Архив посетителей</title>
+</head>
+<body>
+
+<h1>Архив посетителей</h1>
+
+<a data-th-href="@{/role/guard/visitors}">&larr; Вернуться к списку посетителей</a><br>
+<a data-th-href="@{/role/worker/list}">Вернуться к добавлению посетителей</a>
+
+<br><br>
+
+<div data-th-if="${archive.isEmpty()}">
+    <p>Архив пуст</p>
+</div>
+
+<table style="border-collapse: separate; border-spacing: 30px 0;">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>ФИО</th>
+        <th>Организация</th>
+        <th>Отдел</th>
+        <th>Дата посещения</th>
+        <th>Паспортные данные</th>
+        <th>Время входа</th>
+        <th>Время выхода</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-th-each="record, iterStat : ${archive}">
+        <td data-th-text="${iterStat.count}"></td>
+        <td data-th-text="${record.fullName}"></td>
+        <td data-th-text="${record.organization}"></td>
+        <td data-th-text="${record.department}"></td>
+        <td data-th-text="${record.date}"></td>
+        <td data-th-text="${record.passportData}"></td>
+        <td data-th-text="${record.entryTime}"></td>
+        <td data-th-text="${record.exitTime}"></td>
+    </tr>
+    <tr data-th-if="${archive.isEmpty()}">
+        <td colspan="8" style="text-align: center;">Нет записей в архиве</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

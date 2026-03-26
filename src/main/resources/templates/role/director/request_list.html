@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Управление заявками</title>
+</head>
+<body>
+
+<h1>Управление заявками</h1>
+
+<a data-th-href="@{/role/worker/list}">&larr; Вернуться к добавлению посетителей</a>
+
+<br><br>
+
+<div data-th-if="${requests.isEmpty()}">
+    <p>Нет заявок</p>
+</div>
+
+<div data-th-each="request, iterStat : ${requests}">
+
+    <span>Заявка №<span data-th-text="${request.id}"></span></span>
+
+    <br>
+    <table style="border-collapse: separate; border-spacing: 30px 0;">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>ФИО</th>
+            <th>Организация</th>
+            <th>Отдел</th>
+            <th>Дата посещения</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-th-each="visitor, visitorIter : ${request.visitors}">
+            <td data-th-text="${visitorIter.count}"><td>
+            <td data-th-text="${visitor.fullName}"><td>
+            <td data-th-text="${visitor.organization}"><td>
+            <td data-th-text="${visitor.department}"><td>
+            <td data-th-text="${visitor.date}"><td>
+        </tr>
+        </tbody>
+    </table>
+
+    <form method="post" data-th-action="@{/role/director/requests/{id}/approve(id=${request.id})}" style="display: inline;">
+        <button type="submit">Подтвердить заявку</button>
+    </form>
+    <form method="post" data-th-action="@{/role/director/requests/{id}/reject(id=${request.id})}" style="display: inline;">
+        <button type="submit">Отменить заявку</button>
+    </form>
+
+</div>
+</body>
+</html>

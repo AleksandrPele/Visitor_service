@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Учет прохода в здание</title>
+</head>
+<body>
+
+<h1>Охранник - Управление посетителями</h1>
+
+<a data-th-href="@{/role/guard/archive}">Перейти в архив</a><br>
+<a data-th-href="@{/role/worker/list}">Вернуться к добавлению посетителей</a>
+
+<br><br>
+
+<h2>Список посетителей</h2>
+
+<div data-th-if="${visitors.isEmpty()}">
+    <p>Нет посетителей</p>
+</div>
+
+<table style="border-collapse: separate; border-spacing: 30px 0;">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>ФИО</th>
+        <th>Организация</th>
+        <th>Отдел</th>
+        <th>Дата посещения</th>
+        <th>Паспортные данные</th>
+        <th>Время входа</th>
+        <th>Время выхода</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-th-each="visitor, iterStat : ${visitors}">
+        <td data-th-text="${iterStat.count}"></td>
+        <td data-th-text="${visitor.fullName}"></td>
+        <td data-th-text="${visitor.organization}"></td>
+        <td data-th-text="${visitor.department}"></td>
+        <td data-th-text="${visitor.date}"></td>
+
+        <td>
+            <span data-th-if="${visitor.passportData != null}" data-th-text="${visitor.passportData}"></span>
+            <form data-th-if="${visitor.passportData == null and visitor.status == 'WAITING'}"
+                  method="post"
+                  data-th-action="@{/role/guard/visitors/{id}/entry(id=${visitor.id})}">
+                <label>
+                    <input type="text" name="passportData" required style="width: 100px;">
+                </label>
+                <button type="submit">+</button>
+            </form>
+            <span data-th-if="${visitor.passportData == null and visitor.status != 'WAITING'}"></span>
+        </td>
+
+        <td>
+            <span data-th-text="${visitor.entryTime}"></span>
+        </td>
+
+        <td>
+            <span data-th-if="${visitor.exitTime != null}" data-th-text="${visitor.exitTime}"></span>
+            <form data-th-if="${visitor.exitTime == null and visitor.status == 'IN'}"
+                  method="post"
+                  data-th-action="@{/role/guard/visitors/{id}/exit(id=${visitor.id})}"
+                  style="display: inline;">
+                <button type="submit">Выход</button>
+            </form>
+            <span data-th-if="${visitor.exitTime == null and visitor.status != 'IN'}"></span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список Посетителей</title>
+</head>
+<body>
+<a data-th-href="@{/role/worker/create}">+ Добавить посетителя</a>
+<h2>
+    Заявка
+    <form method="post" data-th-action="@{/role/worker/submit}">
+        <button type="submit">Отправить заявку</button>
+    </form>
+
+</h2>
+<table style="border-spacing: 30px 0;">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>ФИО</th>
+        <th>Организация</th>
+        <th>Отдел</th>
+        <th>Дата посещения</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-th-each="visitor : ${visitors}">
+        <td data-th-text="${visitor.id}"></td>
+        <td data-th-text="${visitor.fullName}"></td>
+        <td data-th-text="${visitor.organization}"></td>
+        <td data-th-text="${visitor.department}"></td>
+        <td data-th-text="${visitor.date}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
