@@ -18,7 +18,6 @@ public class DefaultRequestService implements RequestService {
     private final RequestRepository requestRepository;
     private final VisitorRepository visitorRepository;
 
-    @Override
     public List<Request> findAllRequests() {
         return requestRepository.findAll();
     }

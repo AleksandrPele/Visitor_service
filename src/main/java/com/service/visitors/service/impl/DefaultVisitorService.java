@@ -12,7 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DefaultVisitorService implements VisitorService {
 
-    private final TempVisitorRepository tempVisitorRepository;  // изменён тип
+    private final TempVisitorRepository tempVisitorRepository;
 
     @Override
     public List<Visitor> findAllVisitors() {
