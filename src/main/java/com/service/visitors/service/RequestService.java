@@ -5,7 +5,7 @@ import com.service.visitors.entity.Visitor;
 import java.util.List;
 
 public interface RequestService {
-    Request create(List<Visitor> visitors, String status);
+    void create(List<Visitor> visitors, String status);
     List<Request> findByStatus(String status);
     void updateRequestStatus(Integer id, String status);
 }

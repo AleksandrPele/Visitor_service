@@ -24,7 +24,7 @@ public class DefaultRequestService implements RequestService {
 
     @Override
     @Transactional
-    public Request create(List<Visitor> visitors, String status) {
+    public void create(List<Visitor> visitors, String status) {
         Request request = new Request();
         request.setStatus(status);
         Request savedRequest = requestRepository.save(request);
@@ -40,7 +40,6 @@ public class DefaultRequestService implements RequestService {
 
             visitorRepository.save(newVisitor);
         }
-        return savedRequest;
     }
 
     @Override

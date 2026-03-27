@@ -21,7 +21,10 @@ public class Visitor {
     @Column(name = "full_name", nullable = false)
     private String fullName;
 
+    @Column(nullable = false)
     private String organization;
+
+    @Column(nullable = false)
 
     private String department;
 
